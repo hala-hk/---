@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>حبيبي مودي هاد تقرير بتعبيه قبل كل طلعة بحبك</title>
+  <style>
+    :root {
+      --pink-bg-1: #fff0f6;
+      --pink-bg-2: #ffe3ee;
+      --pink-card: #ffffff;
+      --pink-main: #ff4d8d;
+      --pink-dark: #d81b60;
+      --pink-soft: #fff5f9;
+      --pink-border: #f8bbd0;
+      --text-dark: #3a1928;
+      --text-soft: #7c4960;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Tahoma, Arial, sans-serif;
+      background: linear-gradient(155deg, var(--pink-bg-1) 0%, var(--pink-bg-2) 100%);
+      color: var(--text-dark);
+      min-height: 100vh;
+      padding: 28px 16px 60px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .hearts-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .floating-heart {
+      position: absolute;
+      bottom: -35px;
+      color: rgba(255, 77, 141, 0.26);
+      animation: riseHeart linear infinite;
+      user-select: none;
+    }
+
+    @keyframes riseHeart {
+      0% {
+        transform: translateY(0) scale(0.85) rotate(-8deg);
+        opacity: 0;
+      }
+      15% {
+        opacity: 0.95;
+      }
+      85% {
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(-110vh) scale(1.15) rotate(12deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    .title-box {
+      background: linear-gradient(135deg, #ff69a1 0%, #e91e63 100%);
+      color: #ffffff;
+      border-radius: 26px;
+      padding: 26px 20px;
+      text-align: center;
+      box-shadow: 0 14px 30px rgba(233, 30, 99, 0.24);
+      margin-bottom: 20px;
+      animation: popIn 0.4s ease;
+    }
+
+    .title-box .hearts-banner {
+      font-size: 20px;
+      margin-bottom: 8px;
+      letter-spacing: 4px;
+    }
+
+    .title-box h1 {
+      font-size: 20px;
+      line-height: 1.55;
+      font-weight: 800;
+    }
+
+    .field-card {
+      background: var(--pink-card);
+      border: 1.5px solid var(--pink-border);
+      border-radius: 22px;
+      padding: 18px;
+      margin-bottom: 14px;
+      box-shadow: 0 10px 24px rgba(255, 77, 141, 0.12);
+      animation: popIn 0.4s ease;
+    }
+
+    .field-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+
+    .field-label .mini-heart {
+      color: var(--pink-main);
+      font-size: 16px;
+    }
+
+    input[type="text"],
+    input[type="time"],
+    textarea {
+      width: 100%;
+      border: 1.5px solid #f4c2d7;
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-size: 15px;
+      font-family: inherit;
+      color: var(--text-dark);
+      background: var(--pink-soft);
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="time"]:focus,
+    textarea:focus {
+      border-color: var(--pink-main);
+      box-shadow: 0 0 0 4px rgba(255, 77, 141, 0.15);
+      background: #ffffff;
+    }
+
+    textarea {
+      min-height: 85px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    .live-alert {
+      display: none;
+      margin-top: 10px;
+      padding: 11px 14px;
+      border-radius: 14px;
+      background: #ffe8f1;
+      border: 1px solid #f48fb1;
+      color: var(--pink-dark);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.5;
+      animation: popIn 0.25s ease;
+    }
+
+    .live-alert.show {
+      display: block;
+    }
+
+    .submit-btn {
+      width: 100%;
+      border: none;
+      border-radius: 18px;
+      padding: 15px 20px;
+      font-size: 17px;
+      font-weight: 800;
+      font-family: inherit;
+      color: #ffffff;
+      background: linear-gradient(135deg, #ff4d8d 0%, #d81b60 100%);
+      box-shadow: 0 12px 26px rgba(216, 27, 96, 0.28);
+      cursor: pointer;
+      margin-top: 6px;
+      transition: transform 0.15s ease;
+    }
+
+    .submit-btn:active {
+      transform: scale(0.98);
+    }
+
+    .result-box {
+      display: none;
+      background: #ffffff;
+      border: 2px solid var(--pink-main);
+      border-radius: 24px;
+      padding: 22px 18px;
+      margin-top: 20px;
+      text-align: center;
+      box-shadow: 0 14px 32px rgba(255, 77, 141, 0.2);
+      animation: popIn 0.35s ease;
+    }
+
+    .result-box.show {
+      display: block;
+    }
+
+    .love-ending {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--pink-dark);
+      line-height: 1.65;
+      margin-bottom: 14px;
+      background: #fff0f6;
+      padding: 14px;
+      border-radius: 16px;
+    }
+
+    .condition-note {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #b71c5c;
+      margin-bottom: 12px;
+      line-height: 1.55;
+    }
+
+    .summary-details {
+      text-align: right;
+      background: #fff9fc;
+      border: 1px solid var(--pink-border);
+      border-radius: 16px;
+      padding: 14px;
+      white-space: pre-line;
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--text-dark);
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts-layer" id="heartsLayer"></div>
+
+  <div class="wrapper">
+    <div class="title-box">
+      <div class="hearts-banner">💗 💕 💖 💕 💗</div>
+      <h1>حبيبي مودي هاد تقرير بتعبيه قبل كل طلعة بحبك</h1>
+    </div>
+
+    <form id="reportForm">
+      <!-- الخانة الأولى -->
+      <div class="field-card">
+        <label class="field-label" for="leaveTime">
+          <span>متى طالع يعمري ؟</span>
+          <span class="mini-heart">💗</span>
+        </label>
+        <input type="text" id="leaveTime" placeholder="اكتب الوقت..." required />
+      </div>
+
+      <!-- الخانة الثانية -->
+      <div class="field-card">
+        <label class="field-label" for="outfit">
+          <span>ايش الاوتفيت بالتفصيل يروحي ؟</span>
+          <span class="mini-heart">🌸</span>
+        </label>
+        <textarea id="outfit" placeholder="اكتب تفاصيل الاوتفيت..." required></textarea>
+      </div>
+
+      <!-- الخانة الثالثة -->
+      <div class="field-card">
+        <label class="field-label" for="whereTo">
+          <span>وين رايح يحياتي ؟</span>
+          <span class="mini-heart">💕</span>
+        </label>
+        <input type="text" id="whereTo" placeholder="اكتب وين رايح..." required />
+      </div>
+
+      <!-- الخانة الرابعة -->
+      <div class="field-card">
+        <label class="field-label" for="withWho">
+          <span>مع مين يقلبي؟</span>
+          <span class="mini-heart">💖</span>
+        </label>
+        <input type="text" id="withWho" placeholder="اكتب مع مين..." required />
+        <div class="live-alert" id="abdullahAlert">امم حبييت</div>
+      </div>
+
+      <!-- الخانة الخامسة -->
+      <div class="field-card">
+        <label class="field-label" for="backTime">
+          <span>متى راجع يروح حلا ؟</span>
+          <span class="mini-heart">🩷</span>
+        </label>
+        <input type="time" id="backTime" required />
+        <div class="live-alert" id="lateAlert">لا هي كتييير ورح ازعل يمودي ما بيهون عليك صح ؟😞💔 ارجع بكير معناتو</div>
+      </div>
+
+      <button type="submit" class="submit-btn">إرسال التقرير 💗</button>
+    </form>
+
+    <div class="result-box" id="resultBox">
+      <div class="condition-note" id="resultCondition"></div>
+      <div class="love-ending">بحبك كتير انا حبيبي انبسط وانتبه ع حالك حياتيي</div>
+      <div class="summary-details" id="summaryDetails"></div>
+    </div>
+  </div>
+
+  <script>
+    const heartsLayer = document.getElementById("heartsLayer");
+    const icons = ["💗", "💕", "💖", "🩷", "💘"];
+    for (let i = 0; i < 16; i++) {
+      const el = document.createElement("div");
+      el.className = "floating-heart";
+      el.textContent = icons[i % icons.length];
+      el.style.left = `${(i * 6.5) % 97}%`;
+      el.style.fontSize = `${15 + (i % 4) * 4}px`;
+      el.style.animationDuration = `${7.5 + (i % 5) * 2.2}s`;
+      el.style.animationDelay = `${(i % 6) * 1.2}s`;
+      heartsLayer.appendChild(el);
+    }
+
+    const withWhoInput = document.getElementById("withWho");
+    const abdullahAlert = document.getElementById("abdullahAlert");
+    const backTimeInput = document.getElementById("backTime");
+    const lateAlert = document.getElementById("lateAlert");
+
+    function normalizeArabic(text) {
+      return text
+        .trim()
+        .replace(/[إأآا]/g, "ا")
+        .replace(/ة/g, "ه")
+        .replace(/ى/g, "ي")
+        .replace(/\s+/g, " ");
+    }
+
+    function checkAbdullah() {
+      const val = normalizeArabic(withWhoInput.value);
+      if (val === "عبدالله") {
+        abdullahAlert.classList.add("show");
+        return true;
+      } else {
+        abdullahAlert.classList.remove("show");
+        return false;
+      }
+    }
+
+    function isAfterElevenThirty(timeStr) {
+      if (!timeStr || !timeStr.includes(":")) return false;
+      const [hStr, mStr] = timeStr.split(":");
+      const hours = parseInt(hStr, 10);
+      const minutes = parseInt(mStr, 10);
+      if (Number.isNaN(hours) || Number.isNaN(minutes)) return false;
+      const totalMinutes = hours * 60 + minutes;
+      return totalMinutes > (23 * 60 + 30);
+    }
+
+    function checkLateReturn() {
+      const late = isAfterElevenThirty(backTimeInput.value);
+      if (late) {
+        lateAlert.classList.add("show");
+      } else {
+        lateAlert.classList.remove("show");
+      }
+      return late;
+    }
+
+    withWhoInput.addEventListener("input", checkAbdullah);
+    backTimeInput.addEventListener("change", checkLateReturn);
+    backTimeInput.addEventListener("input", checkLateReturn);
+
+    const reportForm = document.getElementById("reportForm");
+    const resultBox = document.getElementById("resultBox");
+    const resultCondition = document.getElementById("resultCondition");
+    const summaryDetails = document.getElementById("summaryDetails");
+
+    reportForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const leaveTime = document.getElementById("leaveTime").value.trim();
+      const outfit = document.getElementById("outfit").value.trim();
+      const whereTo = document.getElementById("whereTo").value.trim();
+      const withWho = withWhoInput.value.trim();
+      const backTime = backTimeInput.value.trim();
+
+      const isAbdullah = checkAbdullah();
+      const isLate = checkLateReturn();
+
+      const notes = [];
+      if (isAbdullah) notes.push("امم حبييت");
+      if (isLate) notes.push("لا هي كتييير ورح ازعل يمودي ما بيهون عليك صح ؟😞💔 ارجع بكير معناتو");
+
+      resultCondition.textContent = notes.join("\n");
+      resultCondition.style.display = notes.length ? "block" : "none";
+
+      summaryDetails.textContent = [
+        `متى طالع يعمري ؟ ${leaveTime}`,
+        `ايش الاوتفيت بالتفصيل يروحي ؟ ${outfit}`,
+        `وين رايح يحياتي ؟ ${whereTo}`,
+        `مع مين يقلبي؟ ${withWho}`,
+        `متى راجع يروح حلا ؟ ${backTime}`
+      ].join("\n");
+
+      resultBox.classList.add("show");
+      resultBox.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+  </script>
+</body>
+</html>
